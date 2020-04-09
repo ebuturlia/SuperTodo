@@ -1,5 +1,7 @@
 import React, {useMemo} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
+
+import TextButton from '../../components/textButton';
 
 import * as DateUtils from '../../utils/dateUtils';
 
@@ -8,15 +10,6 @@ import DatePicker from 'react-native-date-picker';
 import styles from './styles';
 
 const datePattern = 'DD/MM/YY HH:mm';
-
-const Button = props => {
-  const {label, onPress} = props;
-  return (
-    <TouchableOpacity style={styles.buttonStyle} onPress={onPress}>
-      <Text style={styles.buttonText}>{label}</Text>
-    </TouchableOpacity>
-  );
-};
 
 function DateChooser(props) {
   const {
@@ -38,8 +31,8 @@ function DateChooser(props) {
     <View style={[containerStyle]}>
       <View style={styles.controlsContainer}>
         <Text style={styles.date}>{formattedDate}</Text>
-        <Button label={buttonLabel} onPress={onPress}/>
-        <Button label={'Clear'} onPress={() => onDateChange(null)}/>
+        <TextButton label={buttonLabel} onPress={onPress} />
+        <TextButton label={'Clear'} onPress={() => onDateChange(null)} />
       </View>
       {expanded && <DatePicker date={date} onDateChange={onDateChange} />}
     </View>

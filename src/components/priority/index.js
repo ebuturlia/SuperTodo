@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
+import TextButton from '../../components/textButton';
+
 import styles from './styles';
 
 const MAX_AMOUNT = 5;
@@ -27,7 +29,7 @@ function Priority(props) {
             style={styles.activeItem}
           />,
         );
-        activeAmount--
+        activeAmount--;
       } else {
         items.push(
           <TouchableOpacity
@@ -45,13 +47,9 @@ function Priority(props) {
   }
   return (
     <View style={[styles.container, containerStyle]}>
-      {items}
+      <View style={styles.boxesContainer}>{items}</View>
       {onChange && (
-        <TouchableOpacity
-          style={styles.clearButton}
-          onPress={() => onChange(null)}>
-          <Text style={styles.clearText}>Clear</Text>
-        </TouchableOpacity>
+        <TextButton label={'Clear'} onPress={() => onChange(null)} />
       )}
     </View>
   );

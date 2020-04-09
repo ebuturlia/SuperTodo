@@ -4,6 +4,7 @@ export default EStyleSheet.create({
   container: {
     width: '100%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   item: {
     width: 20,
@@ -18,22 +19,26 @@ export default EStyleSheet.create({
     justifyContent: 'center',
   },
   clearText: {
-    color: 'green'
+    color: 'green',
+  },
+  boxesContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   activeItem: {
-    width: 20,
-    height: 20,
+    width: 40,
+    height: 40,
     marginHorizontal: 5,
     backgroundColor: '$greyishGrey',
     borderRadius: 2,
   },
   inactiveItem: {
-    width: 20,
-    height: 20,
+    width: 40,
+    height: 40,
     marginHorizontal: 5,
     backgroundColor: 'white',
     borderRadius: 2,
     borderWidth: 2,
-    borderColor: '$greyishGrey'
-  }
+    borderColor: '$greyishGrey',
+  },
 });

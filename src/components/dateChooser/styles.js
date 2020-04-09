@@ -11,16 +11,4 @@ export default EStyleSheet.create({
     flex: 1,
     fontSize: 20,
   },
-  buttonStyle: {
-    marginLeft: 10,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    height: 50,
-    backgroundColor: '$stylishBlue',
-  },
-  buttonText: {
-    color: 'white'
-  }
 });
