@@ -20,6 +20,11 @@ $ npm run android
 
 ## Screenshots
 
----
-![image](assets/screenshots/list.png) ![image](assets/screenshots/edit.png) ![image](assets/screenshots/delete.png)
+<div flex-direction="row">
+  <img src="assets/screenshots/list.png" width="200" height="400"/>
+  <img width="50" height="400"/>
+  <img src="assets/screenshots/edit.png" width="200" height="400"/>
+  <img width="50" height="400"/>
+  <img src="assets/screenshots/delete.png" width="200" height="400"/>
+<div>
 
