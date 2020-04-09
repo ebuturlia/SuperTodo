@@ -40,7 +40,7 @@ export const editTodo = (id, body) => {
   };
 };
 
-export const delTodo = id => {
+export const deleteTodo = id => {
   return {
     endpoint: endpoints.deleteTodo(id),
     method: 'POST',

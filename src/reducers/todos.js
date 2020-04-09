@@ -45,6 +45,9 @@ const MOCK_TODOS = [
 let initialState = {
   fetching: false,
   fetchingEdit: false,
+  fetchingDelete: false,
+
+  deleteSuccess: null,
   todos: MOCK_TODOS,
   // todos: [],
 };
@@ -125,19 +128,22 @@ const todos = (state = initialState, action) => {
     case types.DELETE_TODO_REQUEST:
       return {
         ...state,
-        fetching: true,
+        fetchingDelete: true,
+        deleteSuccess: null,
       };
     case types.DELETE_TODO_SUCCESS:
       return {
         ...state,
-        fetching: false,
+        fetchingDelete: false,
+        deleteSuccess: true,
       };
     case types.DELETE_TODO_FAILURE: {
-      const tempTodos = state.todos.filter(item => item.id === action.id);
+      const tempTodos = state.todos.filter(item => item.id !== action.id);
       return {
         ...state,
-        fetching: false,
+        fetchingDelete: false,
         todos: tempTodos,
+        deleteSuccess: true, // TODO: change to false
       };
     }
     default:

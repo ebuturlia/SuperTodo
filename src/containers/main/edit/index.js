@@ -1,19 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Alert, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 
 import images from '../../../configs/images';
 
-import {editTodo, addTodo} from '../../../actions/todos';
+import {editTodo, addTodo, deleteTodo} from '../../../actions/todos';
 
 import HeaderButton from '../../../components/headerButton';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
+import Priority from '../../../components/priority';
 
 import styles from './styles';
 
 function EditScreen(props) {
-  const {navigation, route, editTodo, addTodo} = props;
+  const {navigation, route, editTodo, addTodo, deleteTodo} = props;
   const isEdit = route.params.isEdit;
   const todo = route.params.todo;
 
@@ -24,6 +25,10 @@ function EditScreen(props) {
   const [due, setDue] = useState(todo ? todo.due : null);
   const [priority, setPriority] = useState(todo ? todo.priority : null);
 
+  const buildBody = () => {
+    return {title, description, due, priority};
+  };
+
   const showDeleteAlert = () =>
     Alert.alert(
       'Confirm Delete',
@@ -33,7 +38,12 @@ function EditScreen(props) {
         {
           text: 'Confirm',
           style: 'destructive',
-          onPress: isEdit ? () => {} : () => navigation.goBack(),
+          onPress: isEdit
+            ? () => {
+                deleteTodo(todo.id);
+                navigation.goBack();
+              }
+            : () => navigation.goBack(),
         },
       ],
       {cancelable: true},
@@ -69,38 +79,30 @@ function EditScreen(props) {
         onChange={input => setDescription(input)}
         containerStyle={styles.inputMargin}
       />
+      <Priority priority={priority} onChange={value => setPriority(value)} containerStyle={styles.priorityContainer}/>
       <View style={styles.buttonContainer}>
         <Button
           fetching={props.fetchingEdit}
           text={'Save'}
-          onPress={() =>
-            isEdit
-              ? editTodo(todo.id, {
-                  title,
-                  description,
-                  due,
-                  priority,
-                })
-              : addTodo({
-                  title,
-                  description,
-                  due,
-                  priority,
-                })
-          }
+          onPress={() => {
+            isEdit ? editTodo(todo.id, buildBody()) : addTodo(buildBody());
+            navigation.goBack();
+          }}
           containerStyle={styles.inputMargin}
         />
       </View>
     </ScrollView>
   );
 }
-const mapStateToProps = ({todos: {fetchingEdit}}) => ({
+const mapStateToProps = ({todos: {fetchingEdit, deleteSuccess}}) => ({
   fetchingEdit,
+  deleteSuccess,
 });
 
 const mapDispatchToProps = {
   editTodo,
-  addTodo
+  addTodo,
+  deleteTodo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditScreen);

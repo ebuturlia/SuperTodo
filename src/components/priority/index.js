@@ -1,37 +1,60 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 
-const getPriorityBackgroundColor = priority => {
-  switch (priority) {
-    case 1:
-    case 2:
-    case 3:
-      return '#229954';
-    case 4:
-    case 5:
-      return '#E74C3C';
-    default:
-      return 'white';
-  }
-};
+const MAX_AMOUNT = 5;
+const MIN_AMOUNT = 0;
 
 function Priority(props) {
-  const {priority, containerStyle} = props;
+  const {priority, containerStyle, onChange} = props;
   const items = [];
-  for (let i = 0; i < priority; i++) {
-    items.push(
-      <View
-        key={String(i)}
-        style={[
-          styles.item,
-          // {backgroundColor: getPriorityBackgroundColor(priority)},
-        ]}
-      />,
-    );
+
+  let internalPriority = priority;
+  if (priority === null) internalPriority = MIN_AMOUNT;
+  if (priority <= MIN_AMOUNT) internalPriority = MIN_AMOUNT;
+  if (priority >= MAX_AMOUNT) internalPriority = MAX_AMOUNT;
+
+  let activeAmount = internalPriority;
+
+  if (onChange) {
+    for (let i = 0; i < MAX_AMOUNT; i++) {
+      if (activeAmount > 0) {
+        items.push(
+          <TouchableOpacity
+            onPress={() => onChange(i + 1)}
+            key={String(i)}
+            style={styles.activeItem}
+          />,
+        );
+        activeAmount--
+      } else {
+        items.push(
+          <TouchableOpacity
+            onPress={() => onChange(i + 1)}
+            key={String(i)}
+            style={styles.inactiveItem}
+          />,
+        );
+      }
+    }
+  } else {
+    for (let i = 0; i < internalPriority; i++) {
+      items.push(<View key={String(i)} style={styles.item} />);
+    }
   }
-  return <View style={[styles.container, containerStyle]}>{items}</View>;
+  return (
+    <View style={[styles.container, containerStyle]}>
+      {items}
+      {onChange && (
+        <TouchableOpacity
+          style={styles.clearButton}
+          onPress={() => onChange(null)}>
+          <Text style={styles.clearText}>Clear</Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  );
 }
 
 export default Priority;

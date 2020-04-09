@@ -12,4 +12,7 @@ export default EStyleSheet.create({
   inputMargin: {
     marginVertical: 10,
   },
+  priorityContainer: {
+    marginVertical: 10
+  }
 });
