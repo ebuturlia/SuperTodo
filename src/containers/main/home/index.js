@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Alert} from 'react-native';
+import {View, Alert, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 
 import {logout} from '../../../actions/auth';
@@ -8,12 +8,12 @@ import * as routes from '../../../constants/routes';
 import images from '../../../configs/images';
 
 import HeaderButton from '../../../components/headerButton';
-import Input from '../../../components/input';
+import TodoCard from './todoCard';
 
 import styles from './styles';
 
 function HomeScreen(props) {
-  const {logout, navigation} = props;
+  const {logout, navigation, todos} = props;
 
   const showLogoutAlert = () =>
     Alert.alert(
@@ -37,9 +37,27 @@ function HomeScreen(props) {
       ),
     });
   }, [navigation]);
-  return <View style={styles.container}></View>;
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        contentContainerStyle={styles.contentContainer}
+        data={todos}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item}) => (
+          <TodoCard
+            {...item}
+            onPress={() => {}}
+            containerStyle={styles.itemContainer}
+          />
+        )}
+      />
+    </View>
+  );
 }
-const mapStateToProps = state => ({});
+const mapStateToProps = ({todos: {todos}}) => ({
+  todos,
+});
 
 const mapDispatchToProps = {
   logout,
