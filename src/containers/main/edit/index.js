@@ -13,6 +13,8 @@ import Button from '../../../components/button';
 import Priority from '../../../components/priority';
 import DateChooser from '../../../components/dateChooser';
 
+import * as I18n from '../../../I18n';
+
 import styles from './styles';
 
 function EditScreen(props) {
@@ -52,12 +54,12 @@ function EditScreen(props) {
 
   const showDeleteAlert = () =>
     Alert.alert(
-      'Confirm Delete',
-      'Are you sure you want to delete the todo?',
+      I18n.strings('delete.title'),
+      I18n.strings('delete.description'),
       [
-        {text: 'Cancel', onPress: () => {}},
+        {text: I18n.strings('buttons.cancel'), onPress: () => {}},
         {
-          text: 'Confirm',
+          text: I18n.strings('buttons.confirm'),
           style: 'destructive',
           onPress: isEdit
             ? () => {
@@ -72,7 +74,7 @@ function EditScreen(props) {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: isEdit ? 'Edit todo' : 'Create todo',
+      headerTitle: isEdit ? I18n.strings('screens.edit.title') : I18n.strings('screens.add.title'),
       headerRight: () => (
         <HeaderButton iconSource={images.declined} onPress={showDeleteAlert} />
       ),
@@ -86,16 +88,16 @@ function EditScreen(props) {
       keyboardShouldPersistTaps={'handled'}
       bounces={false}>
       <Input
-        label={'Title'}
-        placeholder={'Title'}
+        label={I18n.strings('labels.title')}
+        placeholder={I18n.strings('labels.title')}
         autoCapitalize={'none'}
         text={title}
         onChange={input => setTitle(input === '' ? null : input)}
         containerStyle={styles.inputMargin}
       />
       <Input
-        label={'Description'}
-        placeholder={'Description'}
+        label={I18n.strings('labels.description')}
+        placeholder={I18n.strings('labels.description')}
         text={description}
         onChange={input => setDescription(input === '' ? null : input)}
         containerStyle={styles.inputMargin}
@@ -114,13 +116,13 @@ function EditScreen(props) {
             showDatePicker(!showPicker);
             Keyboard.dismiss();
           }}
-          buttonLabel={showPicker ? 'Done' : 'Change'}
+          buttonLabel={showPicker ? I18n.strings('buttons.done') : I18n.strings('buttons.change')}
           containerStyle={styles.inputMargin}
         />
         <Button
           fetching={props.fetchingEdit}
           disabled={!canSave()}
-          text={'Save'}
+          text={I18n.strings('buttons.save')}
           onPress={() => {
             isEdit ? editTodo(todo.id, buildBody()) : addTodo(buildBody());
             navigation.goBack();

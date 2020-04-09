@@ -1,1 +1,36 @@
-{}
+{
+  "screens": {
+    "home": {
+      "title": "Let's do it"
+    },
+    "edit": {
+      "title": "Edit todo"
+    },
+    "add": {
+      "title": "Create todo"
+    }
+  },
+  "logout": {
+    "title": "Confirm Logout",
+    "description": "Are you sure you want to logout?"
+  },
+  "delete": {
+    "title": "Confirm Delete",
+    "description": "Are you sure you want to delete the todo?"
+  },
+  "buttons": {
+    "save": "Save",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "login": "Log In",
+    "clear": "Clear",
+    "change": "Change",
+    "done": "Done"
+  },
+  "labels": {
+    "username": "Username",
+    "password": "Password",
+    "title": "Title",
+    "description": "Description"
+  }
+}

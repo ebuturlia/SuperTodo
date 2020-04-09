@@ -3,6 +3,8 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import TextButton from '../../components/textButton';
 
+import * as I18n from '../../I18n';
+
 import styles from './styles';
 
 const MAX_AMOUNT = 5;
@@ -49,7 +51,7 @@ function Priority(props) {
     <View style={[styles.container, containerStyle]}>
       <View style={styles.boxesContainer}>{items}</View>
       {onChange && (
-        <TextButton label={'Clear'} onPress={() => onChange(null)} />
+        <TextButton label={I18n.strings('buttons.clear')} onPress={() => onChange(null)} />
       )}
     </View>
   );
