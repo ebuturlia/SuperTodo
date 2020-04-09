@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 
 import HomeScreen from '../containers/main/home';
 import LoginScreen from '../containers/auth/login';
+import EditScreen from '../containers/main/edit';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ const Navigation = props => {
         ) : (
           <>
             <Stack.Screen name={routes.HOME_SCREEN} component={HomeScreen} />
+            <Stack.Screen name={routes.EDIT_SCREEN} component={EditScreen} />
           </>
         )}
       </Stack.Navigator>

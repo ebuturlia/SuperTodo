@@ -40,7 +40,7 @@ export function callApi(endpoint, method, body) {
 
 export const apiMiddleware = store => next => action => {
   let {endpoint} = action;
-  const {types, method, body} = action;
+  const {types, method, body, id} = action; // TODO: delete id when APIs ready
 
   if (!endpoint && !method && !types && action.type) {
     return next(action);
@@ -85,7 +85,10 @@ export const apiMiddleware = store => next => action => {
             type: failureType,
             status: 'ERROR',
             errorMessage: error.errorMessage,
-            errorCode: error.code
+            errorCode: error.code,
+            // TODO: delete the following when APIs ready
+            body,
+            id
           },
         ),
       );
