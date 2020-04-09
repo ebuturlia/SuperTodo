@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Alert, ScrollView} from 'react-native';
+import {View, Alert, ScrollView, Keyboard} from 'react-native';
 
 import {connect} from 'react-redux';
 
@@ -110,7 +110,10 @@ function EditScreen(props) {
           date={due ? new Date(due) : null}
           expanded={showPicker}
           onDateChange={date => setDue(date)}
-          onPress={() => showDatePicker(!showPicker)}
+          onPress={() => {
+            showDatePicker(!showPicker);
+            Keyboard.dismiss();
+          }}
           buttonLabel={showPicker ? 'Done' : 'Change'}
           containerStyle={styles.inputMargin}
         />
