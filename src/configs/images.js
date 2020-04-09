@@ -5,4 +5,5 @@ export default {
   person: require('../../assets/images/person.png'),
   success: require('../../assets/images/success.png'),
   declined: require('../../assets/images/declined.png'),
+  plus: require('../../assets/images/plus.png')
 };

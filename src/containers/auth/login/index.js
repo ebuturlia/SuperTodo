@@ -51,6 +51,7 @@ function LoginScreen(props) {
       <View style={styles.buttonContainer}>
         <Button
           fetching={props.fetching}
+          disabled={!userName || !password}
           text={'Log In'}
           onPress={() => login(userName, password)}
           containerStyle={styles.inputMargin}

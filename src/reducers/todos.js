@@ -86,11 +86,11 @@ const todos = (state = initialState, action) => {
         ...state,
         fetching: false,
         todos: [
-          ...state.todos,
           {
             id: uuidv4(),
             ...action.body,
           },
+          ...state.todos,
         ],
       };
     }

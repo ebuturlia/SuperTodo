@@ -36,7 +36,7 @@ function HomeScreen(props) {
       headerTitle: "Let's do it",
       headerLeft: () => (
         <HeaderButton
-          iconSource={images.about}
+          iconSource={images.plus}
           onPress={() =>
             navigation.navigate(routes.EDIT_SCREEN, {isEdit: false})
           }
