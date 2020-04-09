@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Alert, ScrollView} from 'react-native';
+
 import {connect} from 'react-redux';
 
 import images from '../../../configs/images';
@@ -10,6 +11,7 @@ import HeaderButton from '../../../components/headerButton';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 import Priority from '../../../components/priority';
+import DateChooser from '../../../components/dateChooser';
 
 import styles from './styles';
 
@@ -24,6 +26,7 @@ function EditScreen(props) {
   );
   const [due, setDue] = useState(todo ? todo.due : null);
   const [priority, setPriority] = useState(todo ? todo.priority : null);
+  const [showPicker, showDatePicker] = useState(false);
 
   const buildBody = () => {
     return {title, description, due, priority};
@@ -33,7 +36,7 @@ function EditScreen(props) {
     if (isEdit) {
       if (
         (title !== todo.title && title !== null) ||
-        (description !== todo.description && description !== null ) ||
+        (description !== todo.description && description !== null) ||
         due !== todo.due ||
         priority !== todo.priority
       ) {
@@ -103,6 +106,14 @@ function EditScreen(props) {
         containerStyle={styles.priorityContainer}
       />
       <View style={styles.buttonContainer}>
+        <DateChooser
+          date={due ? new Date(due) : null}
+          expanded={showPicker}
+          onDateChange={date => setDue(date)}
+          onPress={() => showDatePicker(!showPicker)}
+          buttonLabel={showPicker ? 'Done' : 'Change'}
+          containerStyle={styles.inputMargin}
+        />
         <Button
           fetching={props.fetchingEdit}
           disabled={!canSave()}
