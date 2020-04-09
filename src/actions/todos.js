@@ -35,6 +35,7 @@ export const editTodo = (id, body) => {
       types.EDIT_TODO_SUCCESS,
       types.EDIT_TODO_FAILURE,
     ],
+    id, // TODO: delete this later
     body,
   };
 };
@@ -48,5 +49,6 @@ export const delTodo = id => {
       types.DELETE_TODO_SUCCESS,
       types.DELETE_TODO_FAILURE,
     ],
+    id // TODO: delete this later
   };
 };

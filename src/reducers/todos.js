@@ -44,6 +44,7 @@ const MOCK_TODOS = [
 
 let initialState = {
   fetching: false,
+  fetchingEdit: false,
   todos: MOCK_TODOS,
   // todos: [],
 };
@@ -94,12 +95,12 @@ const todos = (state = initialState, action) => {
     case types.EDIT_TODO_REQUEST:
       return {
         ...state,
-        fetching: true,
+        fetchingEdit: true,
       };
     case types.EDIT_TODO_SUCCESS:
       return {
         ...state,
-        fetching: false,
+        fetchingEdit: false,
       };
     case types.EDIT_TODO_FAILURE: {
       const tempTodos = [...state.todos];
@@ -107,7 +108,7 @@ const todos = (state = initialState, action) => {
         item => item.id === action.id,
       );
 
-      if (editedItemIndex === -1) return {...state, fetching: false};
+      if (editedItemIndex === -1) return {...state, fetchingEdit: false};
 
       tempTodos[editedItemIndex] = {
         ...tempTodos[editedItemIndex],
@@ -116,7 +117,7 @@ const todos = (state = initialState, action) => {
 
       return {
         ...state,
-        fetching: false,
+        fetchingEdit: false,
         todos: tempTodos,
       };
     }
@@ -136,7 +137,7 @@ const todos = (state = initialState, action) => {
       return {
         ...state,
         fetching: false,
-        todos: tempTodos
+        todos: tempTodos,
       };
     }
     default:

@@ -58,7 +58,7 @@ function HomeScreen(props) {
           <TodoCard
             {...item}
             onPress={() =>
-              navigation.navigate(routes.EDIT_SCREEN, {isEdit: true})
+              navigation.navigate(routes.EDIT_SCREEN, {isEdit: true, todo: item})
             }
             containerStyle={styles.itemContainer}
           />
