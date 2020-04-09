@@ -7,6 +7,8 @@ import images from '../../../configs/images';
 import Input from '../../../components/input';
 import Button from '../../../components/button';
 
+import * as I18n from '../../../I18n';
+
 import styles from './styles';
 
 function LoginScreen(props) {
@@ -31,16 +33,16 @@ function LoginScreen(props) {
       </View>
       <View style={styles.userForm}>
         <Input
-          label={'Username'}
-          placeholder={'Username'}
+          label={I18n.strings('labels.username')}
+          placeholder={I18n.strings('labels.username')}
           autoCapitalize={'none'}
           text={userName}
           onChange={input => setUserName(input)}
           containerStyle={styles.inputMargin}
         />
         <Input
-          label={'Password'}
-          placeholder={'Password'}
+          label={I18n.strings('labels.password')}
+          placeholder={I18n.strings('labels.password')}
           text={password}
           onChange={input => setPassword(input)}
           containerStyle={styles.inputMargin}
@@ -52,7 +54,7 @@ function LoginScreen(props) {
         <Button
           fetching={props.fetching}
           disabled={!userName || !password}
-          text={'Log In'}
+          text={I18n.strings('buttons.login')}
           onPress={() => login(userName, password)}
           containerStyle={styles.inputMargin}
         />

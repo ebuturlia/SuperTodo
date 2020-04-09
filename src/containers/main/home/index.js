@@ -8,6 +8,8 @@ import {getTodos} from '../../../actions/todos';
 import * as routes from '../../../constants/routes';
 import images from '../../../configs/images';
 
+import * as I18n from '../../../I18n';
+
 import HeaderButton from '../../../components/headerButton';
 import TodoCard from './todoCard';
 
@@ -18,11 +20,11 @@ function HomeScreen(props) {
 
   const showLogoutAlert = () =>
     Alert.alert(
-      'Confirm Logout',
-      'Are you sure you want to logout?',
+      I18n.strings('logout.title'),
+      I18n.strings('logout.description'),
       [
-        {text: 'Cancel', onPress: () => {}},
-        {text: 'Confirm', style: 'destructive', onPress: () => logout()},
+        {text: I18n.strings('buttons.cancel'), onPress: () => {}},
+        {text: I18n.strings('buttons.confirm'), style: 'destructive', onPress: () => logout()},
       ],
       {cancelable: true},
     );
@@ -33,7 +35,7 @@ function HomeScreen(props) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: "Let's do it",
+      headerTitle: I18n.strings('screens.home.title'),
       headerLeft: () => (
         <HeaderButton
           iconSource={images.plus}
