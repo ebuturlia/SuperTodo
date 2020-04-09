@@ -26,7 +26,7 @@ function Priority(props) {
         key={String(i)}
         style={[
           styles.item,
-          {backgroundColor: getPriorityBackgroundColor(priority)},
+          // {backgroundColor: getPriorityBackgroundColor(priority)},
         ]}
       />,
     );

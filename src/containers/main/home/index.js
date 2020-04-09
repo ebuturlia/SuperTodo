@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {View, Alert, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 
 import {logout} from '../../../actions/auth';
+import {getTodos} from '../../../actions/todos';
 
 import * as routes from '../../../constants/routes';
 import images from '../../../configs/images';
@@ -13,7 +14,7 @@ import TodoCard from './todoCard';
 import styles from './styles';
 
 function HomeScreen(props) {
-  const {logout, navigation, todos} = props;
+  const {getTodos, logout, navigation, todos} = props;
 
   const showLogoutAlert = () =>
     Alert.alert(
@@ -26,11 +27,20 @@ function HomeScreen(props) {
       {cancelable: true},
     );
 
-  React.useLayoutEffect(() => {
+  useEffect(() => {
+    getTodos();
+  }, []);
+
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: "Let's do it",
       headerLeft: () => (
-        <HeaderButton iconSource={images.about} onPress={() => {}} />
+        <HeaderButton
+          iconSource={images.about}
+          onPress={() =>
+            navigation.navigate(routes.EDIT_SCREEN, {isEdit: false})
+          }
+        />
       ),
       headerRight: () => (
         <HeaderButton iconSource={images.logout} onPress={showLogoutAlert} />
@@ -43,11 +53,13 @@ function HomeScreen(props) {
       <FlatList
         contentContainerStyle={styles.contentContainer}
         data={todos}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.id}
         renderItem={({item}) => (
           <TodoCard
             {...item}
-            onPress={() => {}}
+            onPress={() =>
+              navigation.navigate(routes.EDIT_SCREEN, {isEdit: true})
+            }
             containerStyle={styles.itemContainer}
           />
         )}
@@ -61,6 +73,7 @@ const mapStateToProps = ({todos: {todos}}) => ({
 
 const mapDispatchToProps = {
   logout,
+  getTodos,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

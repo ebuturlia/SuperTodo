@@ -6,7 +6,7 @@ export default EStyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 5,
-    backgroundColor: '$stylishBlue',
+    backgroundColor: '$greyishGrey',
     justifyContent: 'center',
     alignItems: 'center',
   },

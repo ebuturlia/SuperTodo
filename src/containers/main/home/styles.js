@@ -5,7 +5,8 @@ export default EStyleSheet.create({
     flex: 1
   },
   contentContainer: {
-    paddingHorizontal: '7%'
+    paddingHorizontal: '7%',
+    paddingVertical: 10
   },
   itemContainer: {
     marginVertical: 10
