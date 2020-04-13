@@ -109,7 +109,7 @@ function EditScreen(props) {
       />
       <View style={styles.buttonContainer}>
         <DateChooser
-          date={due ? new Date(due) : null}
+          date={new Date(due)}
           expanded={showPicker}
           onDateChange={date => setDue(date)}
           onPress={() => {
